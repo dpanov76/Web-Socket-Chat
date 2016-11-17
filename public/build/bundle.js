@@ -54,13 +54,11 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	function _interopRequireDefault(obj) {
+	  return obj && obj.__esModule ? obj : { default: obj };
+	}
 
-	_reactDom2.default.render(_react2.default.createElement(
-	  'h1',
-	  null,
-	  'Web socket chat'
-	), document.getElementById('root'));
+	_reactDom2.default.render(_react2.default.createElement('h1', null, 'Web socket chat'), document.getElementById('root'));
 
 /***/ },
 /* 1 */

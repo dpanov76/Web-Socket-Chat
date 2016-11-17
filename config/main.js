@@ -1,20 +1,27 @@
-const express = require('express'),
-      app = express(),
-      server = require('http').createServer(app),
-      io = require('socket.io')(server);
+const express = require('express');
+
+const app = express();
+
+const server = require('http').createServer(app);
+
+const io = require('socket.io')(server);
 
 module.exports = {
-  // Secret key for JWT signing and encryption
-  'secret': 'dimansecretkey',
+    // Secret key for JWT signing and encryption
+  secret: 'dimansecretkey',
   // Database connection information
-  'url': 'mongodb://localhost:27017/chat',
+  url: 'mongodb://localhost:27017/chat',
   // Number records per page
-  'limit': 10,
+  limit: 10,
   // Setting port for server
-  'port': process.env.PORT || 3000,
+  port: process.env.PORT || 3000,
+  apiHost: 'localhost',
+  apiPort: 3001,
+  webpackHost: 'localhost',
+  webpackPort: 3002,
   // Express and properties
-  'app': app,
-  'server': server,
-  'io': io,
-  'express': express
-}
+  app,
+  server,
+  io,
+  express,
+};

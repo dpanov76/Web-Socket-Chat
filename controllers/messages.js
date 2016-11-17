@@ -1,58 +1,57 @@
-"use strict"
+'use strict';
 
-const config = require('../config/main'),
-      Message = require('../models/messages');
+const config = require('../config/main');
+const Message = require('../models/messages');
 
-config.io.on('connection', function(client) {
+config.io.on('connection', (client) => {
+  console.log('Client connected...');
 
-    console.log('Client connected...');
+  Message.find({
 
-    Message.find({
+  // Specify some special searching criteria here
+  // ....
 
-      // Specify some special searching criteria here
-      //....
-
-    },function(err, messages){
-      if (err) return console.log(err);
-      if (messages){
-        for (let index in messages) {
-          client.emit('messages', messages[index].msg);
-        }
+  }, (err, messages) => {
+    if (err) return console.log(err);
+    if (messages) {
+      for (const index in messages) {
+        client.emit('messages', messages[index].msg);
       }
-    }).limit(config.limit).select({
+    }
+    return false;
+  }).limit(config.limit).select({
 
-      // Specify some special seclection criteria here
-      //....
+  // Specify some special seclection criteria here
+  // ....
 
-    }).sort({ _id: -1 });
+  }).sort({ _id: -1 });
 
-    client.on('join', function(data) {
-        client.emit('messages', 'Welcome to the chat!');
+  client.on('join', () => {
+    client.emit('messages', 'Welcome to the chat!');
+  });
+
+  client.on('send', (data) => {
+    client.emit('messages', data);
+
+    // Send message and save to db
+
+    const newmessage = new Message({ msg: data });
+    newmessage.save((err, newmwssage) => {
+      if (err) return console.error(err);
+      if (newmwssage) {
+      // Debugging information
+      // Do some cool stuff here
+        console.log('New message : ', data);
+      }
+      return false;
     });
 
-    client.on('send', function(data) {
-        client.emit('messages', data);
+    client.broadcast.emit('messages', data);
+  });
 
-        // Send message and save to db
-
-        let newmessage = new Message({ msg:data });
-        newmessage.save(function(err, newmwssage){
-          if (err) return console.error(err);
-          if (newmwssage) {
-
-          // Debugging information
-          // Do some cool stuff here
-            console.log("New message : "+data);
-          }
-        });
-
-        client.broadcast.emit('messages', data);
-    });
-
-    client.on('disconnectME', function(data) {
-      console.log('Client disconnected...');
-      client.emit('messages', data);
-      client.disconnect();
-    });
-
+  client.on('disconnectME', (data) => {
+    console.log('Client disconnected...');
+    client.emit('messages', data);
+    client.disconnect();
+  });
 });
