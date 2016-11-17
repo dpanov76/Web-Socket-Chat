@@ -1,7 +1,7 @@
 const assert = require('assert'),
-    mongoose = require('mongoose'),
-    config = require('./config/main'),
-    router = require('./router');
+      mongoose = require('mongoose'),
+      config = require('./config/main'),
+      router = require('./router');
 
 mongoose.Promise = global.Promise;
 mongoose.connect(config.url);

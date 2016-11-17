@@ -1,3 +1,5 @@
+Deploy this app for testing on https://www.heroku.com
+
 ///// create/run DB on port 27017
 _________________________________
 ./mongodb-osx-x86_64-3.2.10/bin/mongod --dbpath=/Users/dpanov/Desktop/ws/data --port 27017
