@@ -41,12 +41,7 @@
     "webpack-hot-middleware": "^2.13.2"
   },
   "devDependencies": {
-    "concurrently": "^3.1.0",
-    "eslint": "^3.10.2",
-    "eslint-config-airbnb": "^13.0.0",
-    "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-jsx-a11y": "^2.2.3",
-    "eslint-plugin-react": "^6.7.1"
+    "concurrently": "^3.1.0"
   },
   "bin": {
     "start": "./server.js"
